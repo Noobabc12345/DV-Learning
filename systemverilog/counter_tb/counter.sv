@@ -8,7 +8,7 @@ module counter #(parameter int w = 8)(
   always @(posedge clk) begin
     if (!rst_n)
       cnt <='0;
-    end else if (en) begin
+  end else if (enable) begin
       cnt <= up ? (cnt + 1'b1) : (cnt - 1'b1);
     end
   end
