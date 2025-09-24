@@ -10,13 +10,17 @@ module alu #(
   output logic         carry  // flag: carry/borrow (for add/sub)
 );
   // Implementation will go here
-  logic [W:0] yadd; assign yadd = a + b;
-  logic [W:0] ysub; assign yadd = a - b;
-  logic [W-1:0] yand; assign yadd = a & b;
-  logic [W:0] yor; assign yadd = a + b;
-  logic [W:0] yxor; assign yadd = a + b;
-
-  always_comb begin
-    if ()
+  // op = 000 add, 001 sub, 010 and, 011 or, 100 xor
   
+  always_comb begin
+    if (op == 000) begin
+      y = a+b;
+    end else (oop == 001) begin
+      y = a-b;
+    end else (oop == 010) begin
+      y = a & b;
+    end else (oop == 011) begin
+      y = a | b;
+    end else (oop == 100) begin
+      y = a ^ b;
 endmodule
