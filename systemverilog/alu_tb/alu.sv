@@ -11,16 +11,27 @@ module alu #(
 );
   // Implementation will go here
   // op = 000 add, 001 sub, 010 and, 011 or, 100 xor
-  
+  logic [W:0] tmp; // one extra bit for carry
+
   always_comb begin
-    if (op == 000) begin
-      y = a+b;
-    end else (oop == 001) begin
-      y = a-b;
-    end else (oop == 010) begin
-      y = a & b;
-    end else (oop == 011) begin
-      y = a | b;
-    end else (oop == 100) begin
-      y = a ^ b;
+    y = '0;
+    carry = 0;
+    case (op)
+      3'b000: begin // add
+        tmp = a + b;
+        y = tmp[W-1:0];
+        carry = tmp[W];
+      end
+      3'b001: begin // add
+        tmp = a - b;
+        y = tmp[W-1:0];
+        carry = tmp[W];
+      end
+      1'b010: y = a & b;
+      1'b011: y = a | b;
+      1'b100: y = a ^ b;
+      default: y = '0;
+    endcase
+
+    zero = (y == '0);    
 endmodule
