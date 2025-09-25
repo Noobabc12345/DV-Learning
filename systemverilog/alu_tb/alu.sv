@@ -16,13 +16,15 @@ module alu #(
   always_comb begin
     y = '0;
     carry = 0;
+    tmp = '0;
+    
     case (op)
       3'b000: begin // add
         tmp = a + b;
         y = tmp[W-1:0];
         carry = tmp[W];
       end
-      3'b001: begin // add
+      3'b001: begin // aub
         tmp = a - b;
         y = tmp[W-1:0];
         carry = tmp[W];
